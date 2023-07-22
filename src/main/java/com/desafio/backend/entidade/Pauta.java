@@ -23,4 +23,8 @@ public class Pauta {
     private ZonedDateTime inicioSessao;
 
     private int duracaoSessaoMinutos = 1;
+
+    public Pauta(String nome) {
+        this.nome = nome;
+    }
 }
