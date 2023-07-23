@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -24,6 +25,12 @@ public class ExcecaoAdvice {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ErroValidacaoDto trataExcecaoValidacao(MethodArgumentNotValidException excecao) {
         return new ErroValidacaoDto(mapErrors(excecao));
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(PautaExcecao.class)
+    public ErroValidacaoDto trataExcecaoValidacao(PautaExcecao excecao) {
+        return new ErroValidacaoDto(Collections.singletonList(excecao.getMessage()));
     }
 
     private List<String> mapErrors(MethodArgumentNotValidException exception) {
